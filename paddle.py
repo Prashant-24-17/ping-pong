@@ -1,39 +1,49 @@
+
+# Author: Shiva Verma
+
+
 import turtle as t
+
+
 class Paddle():
+
     def __init__(self):
-        
+
         self.done = False
         self.reward = 0
-        self.hit , self.miss = 0,0
-        
-        
-        
+        self.hit, self.miss = 0, 0
+
+        # Setup Background
+
         self.win = t.Screen()
-        self.win.title("Paddle")
-        self.win.bgcolor("black")
-        self.win.setup(width=600 , height=600)
-        self.win.tracer()
-        
-        
+        self.win.title('Paddle')
+        self.win.bgcolor('black')
+        self.win.setup(width=600, height=600)
+        self.win.tracer(0)
+
+        # Paddle
+
         self.paddle = t.Turtle()
-        self.paddle.color("white")
-        self.paddle.goto(0,-275)
-        self.paddle.penup()
         self.paddle.speed(0)
-        self.paddle.shape("square")
-        self.paddle.shapesize(stretch_wid=1, stretch_len=5)        
-        
-        
+        self.paddle.shape('square')
+        self.paddle.shapesize(stretch_wid=1, stretch_len=5)
+        self.paddle.color('white')
+        self.paddle.penup()
+        self.paddle.goto(0, -275)
+
+        # Ball
+
         self.ball = t.Turtle()
-        self.ball.shape("circle")
-        self.ball.color("red")
-        self.ball.goto(0,100)
         self.ball.speed(0)
-        self.ball.dx = 3
+        self.ball.shape('circle')
+        self.ball.color('red')
+        self.ball.penup()
+        self.ball.goto(0, 100)
+        self.ball.dx = -3
         self.ball.dy = -3
-        
-        
-        
+
+        # Score
+
         self.score = t.Turtle()
         self.score.speed(0)
         self.score.color('white')
@@ -41,14 +51,17 @@ class Paddle():
         self.score.hideturtle()
         self.score.goto(0, 250)
         self.score.write("Hit: {}   Missed: {}".format(self.hit, self.miss), align='center', font=('Courier', 24, 'normal'))
-        
+
+        # -------------------- Keyboard control ----------------------
+
         self.win.listen()
         self.win.onkey(self.paddle_right, 'Right')
         self.win.onkey(self.paddle_left, 'Left')
-        
-        
+
+    # Paddle movement
+
     def paddle_right(self):
-    
+
         x = self.paddle.xcor()
         if x < 225:
             self.paddle.setx(x+20)
@@ -135,6 +148,6 @@ class Paddle():
 # ------------------------ Human control ------------------------
 #
 # env = Paddle()
-#
+
 # while True:
 #      env.run_frame()
