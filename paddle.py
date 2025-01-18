@@ -1,5 +1,4 @@
 
-# Author: Shiva Verma
 
 
 import turtle as t
